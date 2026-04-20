@@ -1,0 +1,10 @@
+resources:
+  jobs:
+    iot_refresh:
+      name: iot-hello-world-refresh
+      queue:
+        enabled: true
+      tasks:
+        - task_key: refresh_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.iot_etl.id}

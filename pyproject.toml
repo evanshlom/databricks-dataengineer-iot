@@ -1,0 +1,14 @@
+[project]
+name = "iot-hello-world"
+version = "0.0.1"
+description = "IoT sensor data pipeline using Lakeflow SDP and DAB"
+requires-python = ">=3.10,<3.13"
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "pytest",
+    "ruff",
+    "databricks-dlt",
+    "databricks-connect>=15.4,<16.0",
+]

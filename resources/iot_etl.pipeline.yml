@@ -1,0 +1,10 @@
+resources:
+  pipelines:
+    iot_etl:
+      name: iot-hello-world-etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      libraries:
+        - glob:
+            include: ../src/iot_etl/transformations/**

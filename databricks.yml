@@ -1,0 +1,23 @@
+# databricks.yml
+# Root configuration for the iot-hello-world Declarative Automation Bundle.
+
+bundle:
+  name: iot-hello-world
+
+variables:
+  catalog:
+    description: "Unity Catalog catalog for pipeline output"
+    default: main
+  schema:
+    description: "Unity Catalog schema for pipeline output"
+    default: iot_hello_world
+
+include:
+  - resources/*.yml
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://YOUR_WORKSPACE.cloud.databricks.com
