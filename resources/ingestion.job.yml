@@ -6,8 +6,8 @@ resources:
         enabled: true
       trigger:
         periodic:
-          interval: 30
-          unit: MINUTES
+          interval: 1
+          unit: HOURS
       tasks:
         - task_key: fetch_sensor_data
           notebook_task:
