@@ -4,18 +4,21 @@ from pyspark.sql import functions as F
 
 
 @dp.materialized_view(
-    name="iot_gold_country_stats",
-    comment="Aggregated IoT device stats by country",
+    name="sensor_gold_country_stats",
+    comment="Aggregated air quality stats by country from Sensor.Community",
 )
-def iot_gold_country_stats():
+def sensor_gold_country_stats():
     return (
-        spark.read.table("iot_silver")
-        .groupBy("country_name", "country_code")
+        spark.read.table("sensor_silver")
+        .groupBy("country")
         .agg(
-            F.count("*").alias("device_count"),
+            F.countDistinct("sensor_id").alias("sensor_count"),
+            F.count("*").alias("reading_count"),
+            F.round(F.avg("pm10"), 2).alias("avg_pm10"),
+            F.round(F.avg("pm25"), 2).alias("avg_pm25"),
             F.round(F.avg("temperature"), 2).alias("avg_temp"),
             F.round(F.avg("humidity"), 2).alias("avg_humidity"),
-            F.round(F.avg("co2_level"), 2).alias("avg_co2"),
-            F.round(F.avg("battery_level"), 2).alias("avg_battery"),
+            F.round(F.avg("pressure"), 2).alias("avg_pressure"),
+            F.max("timestamp").alias("latest_reading"),
         )
     )

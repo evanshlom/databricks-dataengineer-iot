@@ -4,28 +4,30 @@ from pyspark.sql import functions as F
 
 
 @dp.materialized_view(
-    name="iot_silver",
-    comment="Cleaned IoT data with valid coordinates and standardized fields",
+    name="sensor_silver",
+    comment="Cleaned Sensor.Community data with parsed sensor values and location",
 )
-def iot_silver():
+def sensor_silver():
     return (
-        spark.read.table("iot_bronze")
-        .filter(F.col("latitude").isNotNull() & F.col("longitude").isNotNull())
+        spark.read.table("sensor_bronze")
+        .filter(
+            F.col("sensor_id").isNotNull()
+            & F.col("latitude").isNotNull()
+            & F.col("longitude").isNotNull()
+        )
         .select(
-            F.col("device_id").cast("long"),
-            F.col("device_name"),
-            F.col("ip"),
-            F.col("cca2").alias("country_code"),
-            F.col("cca3").alias("country_code_3"),
-            F.col("cn").alias("country_name"),
+            F.col("sensor_id").cast("long"),
+            F.col("sensor_type"),
+            F.col("location_id").cast("long"),
             F.col("latitude").cast("double"),
             F.col("longitude").cast("double"),
-            F.col("scale").alias("temp_scale"),
-            F.col("temp").cast("double").alias("temperature"),
+            F.col("country"),
+            F.col("timestamp").cast("timestamp"),
+            F.col("P1").cast("double").alias("pm10"),
+            F.col("P2").cast("double").alias("pm25"),
+            F.col("temperature").cast("double"),
             F.col("humidity").cast("double"),
-            F.col("battery_level").cast("long"),
-            F.col("c02_level").cast("long").alias("co2_level"),
-            F.col("lcd").alias("lcd_status"),
-            F.col("timestamp").cast("long").alias("event_ts"),
+            F.col("pressure").cast("double"),
+            F.col("fetch_ts").cast("timestamp"),
         )
     )

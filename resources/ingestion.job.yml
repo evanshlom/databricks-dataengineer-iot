@@ -1,0 +1,14 @@
+resources:
+  jobs:
+    sensor_ingest:
+      name: iot-sensor-ingest
+      queue:
+        enabled: true
+      trigger:
+        periodic:
+          interval: 30
+          unit: MINUTES
+      tasks:
+        - task_key: fetch_sensor_data
+          notebook_task:
+            notebook_path: ../src/iot_etl/ingestion/fetch_sensor_data.ipynb
