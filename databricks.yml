@@ -7,7 +7,7 @@ bundle:
 variables:
   catalog:
     description: "Unity Catalog catalog for pipeline output"
-    default: main
+    default: catalog1
   schema:
     description: "Unity Catalog schema for pipeline output"
     default: iot_hello_world
