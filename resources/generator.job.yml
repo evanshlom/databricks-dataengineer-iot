@@ -1,7 +1,7 @@
 resources:
   jobs:
-    sensor_ingest:
-      name: iot-sensor-ingest
+    data_generator:
+      name: iot-data-generator
       queue:
         enabled: true
       trigger:
@@ -9,6 +9,6 @@ resources:
           interval: 1
           unit: HOURS
       tasks:
-        - task_key: fetch_sensor_data
+        - task_key: generate_data
           notebook_task:
-            notebook_path: ../src/iot_etl/ingestion/fetch_sensor_data.ipynb
+            notebook_path: ../src/iot_etl/ingestion/generate_steel_plant_data.ipynb

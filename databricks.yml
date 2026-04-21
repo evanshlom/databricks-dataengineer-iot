@@ -1,5 +1,5 @@
 # databricks.yml
-# Root configuration for the iot-hello-world Declarative Automation Bundle.
+# Steel plant thermo-hydraulics predictive maintenance pipeline.
 
 bundle:
   name: iot-hello-world
@@ -20,4 +20,4 @@ targets:
     mode: development
     default: true
     workspace:
-      host: https://dbc-812d2e08-3d6c.cloud.databricks.com/
+      host: https://YOUR_WORKSPACE.cloud.databricks.com
