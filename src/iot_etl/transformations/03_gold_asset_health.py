@@ -6,6 +6,7 @@ from pyspark.sql import functions as F
 @dp.materialized_view(
     name="gold_asset_health",
     comment="Asset health summary: sensor stats + PID performance + alarm counts",
+    table_properties={"delta.enableChangeDataFeed": "true"},
 )
 def gold_asset_health():
     sensor_stats = (
